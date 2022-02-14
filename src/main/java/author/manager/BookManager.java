@@ -14,12 +14,10 @@ public class BookManager {
 
     private Connection connection = DBConnectionProvider.getInstance().getConnection();
 
-    private BookManager bookManager = new BookManager();
-
     public  void add(Book book) {
         System.out.println("before saving book");
         System.out.println(book);
-        String sql = "INSERT INTO book(serialID, title, description, price, count, authors) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO book(serialID, title, description, price, count, author) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, book.getSerialID());
@@ -27,7 +25,7 @@ public class BookManager {
             ps.setString(3, book.getDescription());
             ps.setDouble(4, book.getPrice());
             ps.setInt(5, book.getCount());
-            ps.setObject(6, book.getAuthors());
+            ps.setInt(6, book.getAuthor().getId());
             ps.executeUpdate();
             ResultSet resultSet = ps.getGeneratedKeys();
             if (resultSet.next()) {
@@ -72,8 +70,8 @@ public class BookManager {
     public Book getBookByTitle(String title) {
         String sql = "SELECT * FROM book WHERE title = '" + title + "'";
         try {
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(sql);
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 return getBookFromResultSet(resultSet);
             }
@@ -116,8 +114,8 @@ public class BookManager {
     public Book getCountOfBookByAuthor(Author author) {
         String sql = "SELECT * FROM book WHERE author = '" + author + "'";
         try {
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(sql);
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 return getBookFromResultSet(resultSet);
             }
@@ -155,7 +153,7 @@ public class BookManager {
                     .description(resultSet.getString(3))
                     .price(resultSet.getDouble(4))
                     .count(resultSet.getInt(5))
-                    .authors(bookManager.getBooksByAuthor(resultSet.getObject(6, )))
+                    .id(resultSet.getInt(6))
                     .build();
         } catch (SQLException e) {
             return null;

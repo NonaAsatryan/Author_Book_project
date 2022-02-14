@@ -40,32 +40,32 @@ public class BookStorage {
         }
     }
 
-    public void searchBooksByAuthor(Author author) {
-        for (Book book : books) {
-            if (book.getAuthors().contains(author)) {
-                System.out.println(book);
-            }
-        }
-    }
+//    public void searchBooksByAuthor(Author author) {
+//        for (Book book : books) {
+//            if (book.getAuthors().contains(author)) {
+//                System.out.println(book);
+//            }
+//        }
+//    }
 
-    public void countBooksByAuthor(Author author) {
-        int count = 0;
-        for (Book book : books) {
-            if (book.getAuthors().contains(author)) {
-                count++;
-            }
-        }
-        System.out.println("count of " + author.getEmail() + " author's book is " + count);
-    }
+//    public void countBooksByAuthor(Author author) {
+//        int count = 0;
+//        for (Book book : books) {
+//            if (book.getAuthors().contains(author)) {
+//                count++;
+//            }
+//        }
+//        System.out.println("count of " + author.getEmail() + " author's book is " + count);
+//    }
 
-    public void deleteByAuthor(Author author) {
-        for (Book book : books) {
-            if (book.getAuthors().contains(author)) {
-                books.remove(book);
-            }
-        }
-        serialize();
-    }
+//    public void deleteByAuthor(Author author) {
+//        for (Book book : books) {
+//            if (book.getAuthors().contains(author)) {
+//                books.remove(book);
+//            }
+//        }
+//        serialize();
+//    }
 
     public void delete(Book book) {
         books.remove(book);

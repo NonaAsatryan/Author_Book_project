@@ -20,15 +20,15 @@ public class Book implements Serializable {
     private String description;
     private double price;
     private int count;
-    private Set<Author> authors;
+    private Author author;
     private Set<String> tags;
 
-    public Book(String serialID, String title, String description, double price, int count, Set<Author> authors) {
+    public Book(String serialID, String title, String description, double price, int count, Author author) {
         this.serialID = serialID;
         this.title = title;
         this.description = description;
         this.price = price;
         this.count = count;
-        this.authors = authors;
+        this.author = author;
     }
 }

@@ -57,8 +57,8 @@ public class AuthorManager {
     public Author getAuthorByEmail(String email) {
         String sql = "SELECT * FROM author WHERE email = '" + email + "'";
         try {
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(sql);
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 return getAuthorFromResultSet(resultSet);
             }
@@ -86,8 +86,8 @@ public class AuthorManager {
     public Author getAuthorByName(String name) {
         String sql = "SELECT * FROM author WHERE name = '" + name + "'";
         try {
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(sql);
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 return getAuthorFromResultSet(resultSet);
             }

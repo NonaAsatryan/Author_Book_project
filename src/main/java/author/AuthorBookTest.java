@@ -306,7 +306,7 @@ public class AuthorBookTest implements AuthorBookCommands {
                 return;
             }
         }
-        book.setAuthors(authors);
+        book.getAuthor().getId();
     }
 
     private static void changeAuthor() {
